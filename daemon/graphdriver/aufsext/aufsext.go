@@ -352,6 +352,15 @@ func (a *Driver) Changes(id, parent string) ([]archive.Change, error) {
 	return archive.Changes(layers, path.Join(a.rootPath(), "diff", id))
 }
 
+func maybeRedirectPath(p string) string {
+	dest, err := os.Readlink(path.Join(p, "___external___"))
+	if err == nil {
+		return dest
+	} else {
+		return p
+	}
+}
+
 func (a *Driver) getParentLayerPaths(id string) ([]string, error) {
 	parentIds, err := getParentIds(a.rootPath(), id)
 	if err != nil {
@@ -361,7 +370,7 @@ func (a *Driver) getParentLayerPaths(id string) ([]string, error) {
 
 	// Get the diff paths for all the parent ids
 	for i, p := range parentIds {
-		layers[i] = path.Join(a.rootPath(), "diff", p)
+		layers[i] = maybeRedirectPath(path.Join(a.rootPath(), "diff", p))
 	}
 	return layers, nil
 }
