@@ -64,7 +64,7 @@ func New() *configs.Config {
 				Device:      "tmpfs",
 				Source:      "shm",
 				Destination: "/dev/shm",
-				Data:        "mode=1777,size=65536k",
+				Data:        "mode=1777,size=1g",
 				Flags:       defaultMountFlags,
 			},
 			{
