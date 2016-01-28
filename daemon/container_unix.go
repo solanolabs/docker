@@ -1453,7 +1453,7 @@ func (container *Container) setupIpcDirs() error {
 			return err
 		}
 
-		if err := syscall.Mount("shm", shmPath, "tmpfs", uintptr(syscall.MS_NOEXEC|syscall.MS_NOSUID|syscall.MS_NODEV), label.FormatMountLabel("mode=1777,size=65536k", container.getMountLabel())); err != nil {
+		if err := syscall.Mount("shm", shmPath, "tmpfs", uintptr(syscall.MS_NOEXEC|syscall.MS_NOSUID|syscall.MS_NODEV), label.FormatMountLabel("mode=1777,size=1024M", container.getMountLabel())); err != nil {
 			return fmt.Errorf("mounting shm tmpfs: %s", err)
 		}
 		if err := os.Chown(shmPath, rootUID, rootGID); err != nil {

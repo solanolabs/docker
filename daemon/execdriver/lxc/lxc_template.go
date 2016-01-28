@@ -76,7 +76,7 @@ lxc.mount.entry = {{.ProcessConfig.Console}} {{escapeFstabSpaces $ROOTFS}}/dev/c
 {{end}}
 
 lxc.mount.entry = devpts {{escapeFstabSpaces $ROOTFS}}/dev/pts devpts {{formatMountLabel "newinstance,ptmxmode=0666,nosuid,noexec,create=dir" ""}} 0 0
-lxc.mount.entry = shm {{escapeFstabSpaces $ROOTFS}}/dev/shm tmpfs {{formatMountLabel "size=65536k,nosuid,nodev,noexec,create=dir" ""}} 0 0
+lxc.mount.entry = shm {{escapeFstabSpaces $ROOTFS}}/dev/shm tmpfs {{formatMountLabel "size=1024M,nosuid,nodev,noexec,create=dir" ""}} 0 0
 
 {{range $value := .Mounts}}
 {{$createVal := isDirectory $value.Source}}
