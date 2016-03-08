@@ -1434,7 +1434,7 @@ func (s *DockerSuite) TestPostContainersCreateShmSizeNegative(c *check.C) {
 
 func (s *DockerSuite) TestPostContainersCreateShmSizeHostConfigOmitted(c *check.C) {
 	testRequires(c, DaemonIsLinux)
-	var defaultSHMSize int64 = 67108864
+	var defaultSHMSize int64 = 1024 * 1024 * 1024 // 67108864
 	config := map[string]interface{}{
 		"Image": "busybox",
 		"Cmd":   "mount",

@@ -120,7 +120,7 @@ var (
 	// a container is running, but its not.
 	ErrorCodeNotRunning = errcode.Register(errGroup, errcode.ErrorDescriptor{
 		Value:          "NOTRUNNING",
-		Message:        "Container %s is not running",
+		Message:        "Container %s is not running (notrunning)",
 		Description:    "The specified action can not be taken due to the container not being in a running state",
 		HTTPStatusCode: http.StatusInternalServerError,
 	})

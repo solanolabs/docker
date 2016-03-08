@@ -31,8 +31,8 @@ import (
 	"github.com/opencontainers/runc/libcontainer/label"
 )
 
-// DefaultSHMSize is the default size (64MB) of the SHM which will be mounted in the container
-const DefaultSHMSize int64 = 67108864
+// DefaultSHMSize is the default size (1G) of the SHM which will be mounted in the container
+const DefaultSHMSize int64 = 1024 * 1024 * 1024 // 67108864
 
 // Container holds the fields specific to unixen implementations.
 // See CommonContainer for standard fields common to all containers.
