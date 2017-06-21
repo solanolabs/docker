@@ -43,6 +43,7 @@ RUN apt-get update && apt-get install -y \
 	gcc-mingw-w64 \
 	git \
 	iptables \
+  jq \
 	libapparmor-dev \
 	libcap-dev \
 	libsqlite3-dev \
@@ -63,8 +64,12 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends
 
 # Get lvm2 source for compiling statically
-RUN git clone -b v2_02_103 https://git.fedorahosted.org/git/lvm2.git /usr/local/lvm2
+################################################
+###Moved FEB 2017
+#RUN git clone -b v2_02_103 https://git.fedorahosted.org/git/lvm2.git /usr/local/lvm2
 # see https://git.fedorahosted.org/cgit/lvm2.git/refs/tags for release tags
+#################################################
+RUN git clone -b v2_02_103 git://sourceware.org/git/lvm2.git /usr/local/lvm2
 
 # Compile and install lvm2
 RUN cd /usr/local/lvm2 \
@@ -182,8 +187,8 @@ RUN ln -sfv $PWD/.bashrc ~/.bashrc
 RUN ln -sv $PWD/contrib/completion/bash/docker /etc/bash_completion.d/docker
 
 # Get useful and necessary Hub images so we can "docker load" locally instead of pulling
-COPY contrib/download-frozen-image.sh /go/src/github.com/docker/docker/contrib/
-RUN ./contrib/download-frozen-image.sh /docker-frozen-images \
+COPY contrib/download-frozen-image-v2.sh /go/src/github.com/docker/docker/contrib/
+RUN ./contrib/download-frozen-image-v2.sh /docker-frozen-images \
 	busybox:latest@8c2e06607696bd4afb3d03b687e361cc43cf8ec1a4a725bc96e39f05ba97dd55 \
 	hello-world:frozen@91c95931e552b11604fea91c2f537284149ec32fff0f700a4769cfd31d7696ae \
 	jess/unshare@5c9f6ea50341a2a8eb6677527f2bdedbf331ae894a41714fda770fb130f3314d
